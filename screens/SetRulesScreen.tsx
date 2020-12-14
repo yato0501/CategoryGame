@@ -12,10 +12,10 @@ class SetRulesScreen extends React.Component {
       <View style={styles.container}>
         {/* TODO: Sets the rule of the card here */}
         {
-          <Text>{JSON.stringify(this.props)}</Text>
-          // this.props.availableCards.forEach((card: Card ) => {
-          // <Text>{card.suite} {card.value}</Text>
-          // })
+          //<Text>{JSON.stringify(this.props)}</Text>
+          this.props.availableCards.map((card: Card ) => 
+            <Text>{card.suite} {card.value}</Text>
+          )
         }
         <Text style={styles.title}>Setting Rules</Text>
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
@@ -42,9 +42,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state: State) => {
-  console.log(state);
-  const { availableCards, rules } = state
+const mapStateToProps = (state: any) => {
+  const { availableCards, rules } = state.gameState
   return { availableCards, rules }
 };
 

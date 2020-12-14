@@ -30,5 +30,5 @@ const gameReducer = (state = INITIAL_STATE, action : any) => {
 };
 
 export default combineReducers({
-  game: gameReducer
+  gameState: gameReducer
 });
