@@ -11,19 +11,37 @@ const initialAvailableCards = () : Card[] => {
       cards.push({suite: suite, value: value});
     });
   });
+
+  cards = shuffleCards(cards);
+
+  return cards;
+}
+
+// citation: https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
+function shuffleCards(cards: Card[]): Card[] {
+  for(let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * i);
+    const temp = cards[i];
+    cards[i] = cards[j];
+    cards[j] = temp;
+  }
+
   return cards;
 }
 
 const INITIAL_STATE: State = {
   availableCards: initialAvailableCards(),
   seenCards: [],
-  rules: []
+  rules: [],
+  currentCard: {suite: '', value: ''}
 };
 
 
 
 const gameReducer = (state = INITIAL_STATE, action : any) => {
   switch (action.type) {
+    case 'NEXT_CARD':
+      return {...state, currentCard: action.payload}
     default:
       return state
   }

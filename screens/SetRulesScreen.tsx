@@ -13,9 +13,9 @@ class SetRulesScreen extends React.Component {
         {/* TODO: Sets the rule of the card here */}
         {
           //<Text>{JSON.stringify(this.props)}</Text>
-          this.props.availableCards.map((card: Card ) => 
-            <Text>{card.suite} {card.value}</Text>
-          )
+          // this.props.availableCards.map((card: Card ) => 
+          //   <Text>{card.suite} {card.value}</Text>
+          // )
         }
         <Text style={styles.title}>Setting Rules</Text>
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />

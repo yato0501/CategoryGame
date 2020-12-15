@@ -1,5 +1,6 @@
 interface State {
     availableCards: Card[],
     seenCards: Card[],
-    rules: Rule[]
+    rules: Rule[],
+    currentCard: Card
 }
