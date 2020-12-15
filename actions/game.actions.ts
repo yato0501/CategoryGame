@@ -18,3 +18,7 @@ export const addRule = (rule: any) => (
   export const cardsDepleted = () => ({
     type: 'CARDS_DEPLETED'
   });
+
+  export const resetGame = () => ({
+    type: 'RESET_GAME'
+  });

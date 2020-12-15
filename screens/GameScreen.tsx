@@ -1,20 +1,23 @@
 import * as React from 'react';
-import { StyleSheet, TouchableHighlight } from 'react-native';
+import { StyleSheet, TouchableHighlight, Button } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { nextCard, firstCardDrawn, cardsDepleted } from '../actions/game.actions';
+import { nextCard, firstCardDrawn, cardsDepleted, resetGame } from '../actions/game.actions';
 
-class GameScreen extends React.Component {
+class GameScreen extends React.Component<any> {
 
   render(){
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Category Game</Text>
-        {/* {
-          getCurrentCard(this.props.availableCards)
-        } */}
+        <Button
+          onPress={() => this.resetGame()}
+          title='Reset Game'
+          color="#841584"
+          accessibilityLabel='Reset Game'/>
+
         <TouchableHighlight onPress={() => this.getNextCard(this.props.availableCards)}>
             <CardArea isFirstCardDrawn={this.props.isFirstCardDrawn} currentCard={this.props.currentCard} isCardsDepleted={this.props.isCardsDepleted} />
         </TouchableHighlight>
@@ -23,17 +26,23 @@ class GameScreen extends React.Component {
     );
   }
 
+  resetGame() {
+    this.props.resetGame();
+  }
 
- 
 
   // TODO: do better here and handle the undefined type
   getNextCard(cards: Card[]) {
     let currentCard = cards.pop();
     if(currentCard == null) {
       this.props.cardsDepleted();
+    } else {
+      this.props.nextCard(currentCard);
     }
-    this.props.nextCard(currentCard);
-    this.props.firstCardDrawn();
+    
+    if(!this.props.isFirstCardDrawn) {
+      this.props.firstCardDrawn();
+    }
   }
 }
 
@@ -90,7 +99,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => (
   bindActionCreators({
-    nextCard, firstCardDrawn, cardsDepleted
+    nextCard, firstCardDrawn, cardsDepleted, resetGame
   }, dispatch)
 );
 

@@ -48,6 +48,8 @@ const gameReducer = (state = INITIAL_STATE, action : any) => {
       return {...state, isFirstCardDrawn: true};
     case 'CARDS_DEPLETED':
       return {...state, isCardsDepleted: true};
+    case 'RESET_GAME':
+      return {...INITIAL_STATE};
     default:
       return state;
   }
