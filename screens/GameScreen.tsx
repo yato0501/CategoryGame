@@ -4,7 +4,7 @@ import { StyleSheet, TouchableHighlight } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { nextCard } from '../actions/game.actions';
+import { nextCard, firstCardDrawn, cardsDepleted } from '../actions/game.actions';
 
 class GameScreen extends React.Component {
 
@@ -16,10 +16,7 @@ class GameScreen extends React.Component {
           getCurrentCard(this.props.availableCards)
         } */}
         <TouchableHighlight onPress={() => this.getNextCard(this.props.availableCards)}>
-          {/* <Image style={styles.imagestyle} source={require('./ic_action_name.png')} /> */}
-          {/* <Text>{this.currentCard?.suite} {this.currentCard?.value} area</Text> */}
-
-            <CardArea cardAvailableCount={this.props.availableCards.length} currentCard={this.props.currentCard} />
+            <CardArea isFirstCardDrawn={this.props.isFirstCardDrawn} currentCard={this.props.currentCard} isCardsDepleted={this.props.isCardsDepleted} />
         </TouchableHighlight>
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       </View>
@@ -32,19 +29,30 @@ class GameScreen extends React.Component {
   // TODO: do better here and handle the undefined type
   getNextCard(cards: Card[]) {
     let currentCard = cards.pop();
+    if(currentCard == null) {
+      this.props.cardsDepleted();
+    }
     this.props.nextCard(currentCard);
+    this.props.firstCardDrawn();
   }
 }
 
 function CardArea(props: any) {
-  const cardAvailableCount = props.cardAvailableCount;
+  const isFirstCardDrawn = props.isFirstCardDrawn;
   const currentCard = props.currentCard;
+  const isCardsDepleted = props.isCardsDepleted;
 
   // We want to show the back of a card image if we haven't started yet.
-  if (cardAvailableCount == 52) {
+  if (!isFirstCardDrawn) {
     return <BackOfCard />;
+  } else if (isCardsDepleted) {
+    return <BlankCard />;
   }
   return <FrontOfCard currentCard={currentCard}/>;
+}
+
+function BlankCard(props: any) {
+  return <Text>Blank Card</Text>;
 }
 
 function BackOfCard(props: any) {
@@ -76,13 +84,13 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any) => {
-  const { availableCards, rules, currentCard } = state.gameState
-  return { availableCards, rules, currentCard }
+  const { availableCards, rules, currentCard, isFirstCardDrawn, isCardsDepleted } = state.gameState
+  return { availableCards, rules, currentCard, isFirstCardDrawn, isCardsDepleted }
 };
 
 const mapDispatchToProps = (dispatch: any) => (
   bindActionCreators({
-    nextCard,
+    nextCard, firstCardDrawn, cardsDepleted
   }, dispatch)
 );
 

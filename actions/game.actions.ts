@@ -11,3 +11,10 @@ export const addRule = (rule: any) => (
       payload: card,
     }
   );
+  export const firstCardDrawn = () => ({
+    type: 'FIRST_CARD_DRAWN'  
+  });
+
+  export const cardsDepleted = () => ({
+    type: 'CARDS_DEPLETED'
+  });

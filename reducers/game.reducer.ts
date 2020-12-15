@@ -33,7 +33,9 @@ const INITIAL_STATE: State = {
   availableCards: initialAvailableCards(),
   seenCards: [],
   rules: [],
-  currentCard: {suite: '', value: ''}
+  currentCard: {suite: '', value: ''},
+  isFirstCardDrawn: false,
+  isCardsDepleted: false
 };
 
 
@@ -41,9 +43,13 @@ const INITIAL_STATE: State = {
 const gameReducer = (state = INITIAL_STATE, action : any) => {
   switch (action.type) {
     case 'NEXT_CARD':
-      return {...state, currentCard: action.payload}
+      return {...state, currentCard: action.payload};
+    case 'FIRST_CARD_DRAWN':
+      return {...state, isFirstCardDrawn: true};
+    case 'CARDS_DEPLETED':
+      return {...state, isCardsDepleted: true};
     default:
-      return state
+      return state;
   }
 };
 
