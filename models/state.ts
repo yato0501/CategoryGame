@@ -1,8 +1,9 @@
 interface State {
     availableCards: Card[],
     seenCards: Card[],
-    rules: Rule[],
+    rules: ValueRule[],
     currentCard: Card,
     isFirstCardDrawn: boolean,
-    isCardsDepleted: boolean
+    isCardsDepleted: boolean,
+    currentRule: ValueRule
 }

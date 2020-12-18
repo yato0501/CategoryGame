@@ -19,7 +19,7 @@ class GameScreen extends React.Component<any> {
           accessibilityLabel='Reset Game'/>
 
         <TouchableHighlight onPress={() => this.getNextCard(this.props.availableCards)}>
-            <CardArea isFirstCardDrawn={this.props.isFirstCardDrawn} currentCard={this.props.currentCard} isCardsDepleted={this.props.isCardsDepleted} />
+            <CardArea isFirstCardDrawn={this.props.isFirstCardDrawn} currentCard={this.props.currentCard} isCardsDepleted={this.props.isCardsDepleted} currentRule={this.props.currentRule} />
         </TouchableHighlight>
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       </View>
@@ -50,6 +50,7 @@ function CardArea(props: any) {
   const isFirstCardDrawn = props.isFirstCardDrawn;
   const currentCard = props.currentCard;
   const isCardsDepleted = props.isCardsDepleted;
+  const currentRule = props.currentRule;
 
   // We want to show the back of a card image if we haven't started yet.
   if (!isFirstCardDrawn) {
@@ -57,7 +58,7 @@ function CardArea(props: any) {
   } else if (isCardsDepleted) {
     return <BlankCard />;
   }
-  return <FrontOfCard currentCard={currentCard}/>;
+  return <FrontOfCard currentCard={currentCard} currentRule={currentRule}/>;
 }
 
 function BlankCard(props: any) {
@@ -70,7 +71,13 @@ function BackOfCard(props: any) {
 
 function FrontOfCard(props: any) {
   const currentCard = props.currentCard;
-return <Text>Front of Card is {currentCard.suite} {currentCard.value}</Text>;
+  const currentRule = props.currentRule;
+  return (
+    <div>
+      <Text>Front of Card is {currentCard.suite} {currentCard.value}</Text>
+      <Text> Rule is {currentRule.ruleTitle} - {currentRule.ruleDescription}</Text>
+    </div>
+  );
 }
 
 
@@ -93,8 +100,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any) => {
-  const { availableCards, rules, currentCard, isFirstCardDrawn, isCardsDepleted } = state.gameState
-  return { availableCards, rules, currentCard, isFirstCardDrawn, isCardsDepleted }
+  const { availableCards, rules, currentCard, isFirstCardDrawn, isCardsDepleted, currentRule } = state.gameState
+  return { availableCards, rules, currentCard, isFirstCardDrawn, isCardsDepleted, currentRule }
 };
 
 const mapDispatchToProps = (dispatch: any) => (
