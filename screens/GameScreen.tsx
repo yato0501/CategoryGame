@@ -19,8 +19,9 @@ class GameScreen extends React.Component<any> {
           accessibilityLabel='Reset Game'/>
 
         <TouchableHighlight onPress={() => this.getNextCard(this.props.availableCards)}>
-            <CardArea isFirstCardDrawn={this.props.isFirstCardDrawn} currentCard={this.props.currentCard} isCardsDepleted={this.props.isCardsDepleted} currentRule={this.props.currentRule} />
+            <Text>Touch Here {this.props?.currentCard?.suite}</Text>
         </TouchableHighlight>
+        <CardArea isFirstCardDrawn={this.props.isFirstCardDrawn} currentCard={this.props.currentCard} isCardsDepleted={this.props.isCardsDepleted} currentRule={this.props.currentRule} />
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       </View>
     );
@@ -71,11 +72,12 @@ function BackOfCard(props: any) {
 
 function FrontOfCard(props: any) {
   const currentCard = props.currentCard;
-  const currentRule = props.currentRule;
+  //const currentRule = props.currentRule;
   return (
     <div>
       <Text>Front of Card is {currentCard.suite} {currentCard.value}</Text>
-      <Text> Rule is {currentRule.ruleTitle} - {currentRule.ruleDescription}</Text>
+      <hr />
+      {/* <Text> Rule is {currentRule.ruleTitle} - {currentRule.ruleDescription}</Text> */}
     </div>
   );
 }
