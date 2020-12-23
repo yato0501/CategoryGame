@@ -1,6 +1,7 @@
 interface Card {
     suite: string,
-    value: string
+    value: string,
+    image: string
 }
 
 interface ValueRule {

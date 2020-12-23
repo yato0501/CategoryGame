@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, TouchableHighlight, Button } from 'react-native';
+import { StyleSheet, TouchableHighlight, Button, Image } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { connect } from 'react-redux';
@@ -17,9 +17,9 @@ class GameScreen extends React.Component<any> {
           title='Reset Game'
           color="#841584"
           accessibilityLabel='Reset Game'/>
-
+        
         <TouchableHighlight onPress={() => this.getNextCard(this.props.availableCards)}>
-            <Text>Touch Here {this.props?.currentCard?.suite}</Text>
+          <Image source={require('../assets/images/card/' + this.props.currentCard.image)} style={styles.card}/>
         </TouchableHighlight>
         <CardArea isFirstCardDrawn={this.props.isFirstCardDrawn} currentCard={this.props.currentCard} isCardsDepleted={this.props.isCardsDepleted} currentRule={this.props.currentRule} />
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
@@ -99,6 +99,10 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  card: {
+    width:250,
+    height:350
+  }
 });
 
 const mapStateToProps = (state: any) => {
