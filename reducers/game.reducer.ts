@@ -15,7 +15,7 @@ const valueRule: ValueRule[] = [{value: 'a', ruleTitle: 'Waterfall', ruleDescrip
 {value: 'j', ruleTitle: 'Thumb', ruleDescription: 'Drawing a Jack makes you the Thumb Master. Whenever you choose you can put your thumb on the table causing all players to race to do the same. Last player to do so has to drink. You remain Thumb Master until a new Jack is drawn.'},
 {value: 'q', ruleTitle: 'Question', ruleDescription: 'Ask a question from any other player, who must in turn ask a different player a question. Whoever doesn’t answer with a question has to drink, and you can’t ask a question back to the person who last asked you.'},
 {value: 'k', ruleTitle: 'New rule', ruleDescription: 'The player who picks a King gets to create a new rule for the game. If the rule is not followed the person who broke the rule has to drink. A good rule is to for example only be allowed to hold the drink in your left hand.'}];
-const cardImage: string[][] = ['a'];
+
 /*
 10: Categories – The player who picked the card chooses a category. Then everyone goes around and says something that fits in the chosen category. Whoever cannot think of anything in the category has to drink. Good categories to use include types of liquor, car companies, and types of cereal.
 Jack: Thumb – Drawing a Jack makes you the Thumb Master. Whenever you choose you can put your thumb on the table causing all players to race to do the same. Last player to do so has to drink. You remain Thumb Master until a new Jack is drawn.
