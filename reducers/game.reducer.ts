@@ -54,6 +54,8 @@ const INITIAL_STATE: State = {
   availableCards: initialAvailableCards(),
   seenCards: [],
   rules: valueRule,
+
+  //images comes from https://www.me.uk/cards/makeadeck.cgi?view
   currentCard: {suite: '', value: '', image: '1B.svg'},
   currentRule: {value: '', ruleTitle: '', ruleDescription: ''},
   isFirstCardDrawn: false,
